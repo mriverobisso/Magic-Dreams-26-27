@@ -3,71 +3,138 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Magic Dreams | Volvemos pronto</title>
-<meta name="description" content="Magic Dreams está en mantenimiento. Visítanos en nuestros locales físicos o síguenos en redes.">
+<title>Magic Dreams Mantenimiento</title>
+<meta name="description" content="Magic Dreams está renovando su web. Visítanos en nuestros 8 locales de Guayaquil o síguenos en redes.">
 <meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#06141f; --bg2:#0a3a58; --card:rgba(255,255,255,.07); --line:rgba(255,255,255,.14);
-  --text:#f5f2ff; --muted:#b9b0d9; --accent:#2cc0f5; --accent2:#1597c9; --ok:#3ddc97;
+  color-scheme:light;
+  /* paleta tomada del logo: azul marino, rosa, naranja, coral */
+  --bg:#ffffff; --bg2:#fff7f8; --ink:#2b3c54; --muted:#62718a; --line:#e8ecf2;
+  --brand:#e94667; --brand2:#2b3c54; --accent:#f39200; --soft:#fdecef;
+  --font:"Outfit",system-ui,sans-serif; --display:"Outfit",system-ui,sans-serif;
+  --r:20px; --shadow:0 12px 30px -16px rgba(43,60,84,.35);
+}
+body.kids{
+  --bg2:#fff8e8; --ink:#2b3c54; --muted:#6a6f8f; --line:#ffe2a8; --soft:#fff0c9;
+  --font:"Fredoka",system-ui,sans-serif; --display:"Fredoka",system-ui,sans-serif; --r:28px;
+  --shadow:0 12px 0 -6px rgba(43,60,84,.12);
 }
 *{box-sizing:border-box;margin:0}
-body{
-  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--text);
-  background:radial-gradient(1200px 600px at 80% -10%,var(--bg2),transparent),var(--bg);
-  min-height:100vh;line-height:1.5;overflow-x:hidden;
-}
-#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
-main{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:48px 16px 32px}
-header{text-align:center;margin-bottom:40px}
-.logo{font-size:clamp(2rem,6vw,3.4rem);font-weight:800;letter-spacing:.02em;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.badge{display:inline-flex;gap:8px;align-items:center;margin:18px 0 10px;padding:6px 14px;border:1px solid var(--line);
-  border-radius:99px;font-size:.85rem;color:var(--muted);background:var(--card)}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
-@keyframes pulse{50%{opacity:.3;transform:scale(1.5)}}
-h1{font-size:clamp(1.5rem,4vw,2.3rem);margin-bottom:10px}
-header p{color:var(--muted);max-width:560px;margin:0 auto}
-#countdown{display:none;justify-content:center;gap:12px;margin-top:24px}
-#countdown div{min-width:72px;padding:10px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
-#countdown b{display:block;font-size:1.7rem;font-variant-numeric:tabular-nums}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.5;overflow-x:hidden;min-height:100vh;transition:background .4s}
+body.kids{background:linear-gradient(180deg,#fff 0,var(--bg2) 100%)}
+#deco{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.6;animation:drift 18s ease-in-out infinite alternate}
+.blob.a{width:420px;height:420px;background:#ffd9e0;top:-130px;right:-90px}
+.blob.b{width:340px;height:340px;background:#ffe9c7;bottom:-90px;left:-70px;animation-delay:-6s}
+@keyframes drift{to{transform:translate(-40px,50px) scale(1.12)}}
+body.kids .blob.a{background:#ffe4a0}body.kids .blob.b{background:#ffd1e6}
+
+/* globos del modo infantil */
+.balloon{position:absolute;bottom:-120px;width:46px;height:58px;border-radius:50% 50% 48% 48%;pointer-events:auto;cursor:pointer;
+  animation:rise linear forwards;box-shadow:inset -8px -8px 0 rgba(0,0,0,.08)}
+.balloon::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:46px;background:rgba(43,60,84,.25);transform:translateX(-50%)}
+@keyframes rise{to{transform:translateY(calc(-100vh - 220px)) translateX(var(--dx,0))}}
+.pop{pointer-events:none;font-weight:700;color:var(--ink);animation:poof .7s ease-out forwards}
+@keyframes poof{from{transform:scale(.6);opacity:1}to{transform:scale(2.2) translateY(-20px);opacity:0}}
+
+main{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:24px 16px 40px}
+.top{display:flex;justify-content:flex-end}
+.kidsbtn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:99px;border:2px solid var(--line);background:#fff;
+  font:600 .92rem var(--font);color:var(--ink);cursor:pointer;transition:.2s}
+.kidsbtn:hover{transform:translateY(-2px);border-color:var(--brand)}
+.kidsbtn[aria-pressed=true]{background:#ffc233;border-color:#ffc233}
+.kidsbtn:focus-visible,.card:focus-visible,.social a:focus-visible,.dlg button:focus-visible,.dlg a:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+
+header{text-align:center;padding:10px 0 26px}
+.logo{display:block;width:min(260px,62vw);height:auto;margin:0 auto 18px}
+body.kids .logo{animation:wob 3s ease-in-out infinite}
+@keyframes wob{50%{transform:rotate(-2.5deg) scale(1.03)}}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;background:var(--soft);color:var(--brand);font-weight:600;font-size:.88rem}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--brand);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scale(1.6);opacity:.4}}
+h1{font-family:var(--display);font-size:clamp(2rem,6vw,3.5rem);line-height:1.1;margin:16px auto 12px;max-width:16ch;text-wrap:balance}
+h1 em{font-style:normal;color:var(--brand)}
+header p{color:var(--muted);max-width:56ch;margin:0 auto;font-size:1.05rem}
+#countdown{display:none;justify-content:center;gap:10px;margin-top:22px;flex-wrap:wrap}
+#countdown div{min-width:74px;padding:10px;border-radius:16px;background:var(--soft);text-align:center}
+#countdown b{display:block;font-size:1.6rem;font-variant-numeric:tabular-nums;color:var(--brand)}
 #countdown span{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-h2{font-size:1.15rem;margin:36px 0 14px;display:flex;align-items:center;gap:10px}
-h2::after{content:"";flex:1;height:1px;background:var(--line)}
-.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.controls input{flex:1;min-width:200px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);
-  background:var(--card);color:var(--text);font:inherit}
-.controls input:focus{outline:2px solid var(--accent2)}
-.controls button{padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;cursor:pointer}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-.card{padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--card);backdrop-filter:blur(8px);
-  display:flex;flex-direction:column;gap:6px;transition:transform .2s,border-color .2s}
-.card:hover{transform:translateY(-3px);border-color:var(--accent2)}
-.card h3{font-size:1.02rem}
-.card small{color:var(--muted)}
-.card .tag{align-self:flex-start;font-size:.72rem;padding:2px 9px;border-radius:99px;border:1px solid var(--line);color:var(--muted)}
-.card .tag.open{color:var(--ok);border-color:var(--ok)}
-.card a.map{margin-top:auto;padding-top:8px;color:var(--accent);text-decoration:none;font-weight:600;font-size:.9rem}
-.card a.map:hover{text-decoration:underline}
+
+h2{font-family:var(--display);font-size:1.4rem;margin:26px 0 14px}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.controls input{flex:1;min-width:200px;padding:12px 18px;border-radius:99px;border:2px solid var(--line);background:#fff;color:var(--ink);font:inherit}
+.controls input:focus{outline:none;border-color:var(--brand)}
+.controls button{padding:12px 18px;border-radius:99px;border:2px solid var(--line);background:#fff;color:var(--ink);font:600 .95rem var(--font);cursor:pointer}
+.controls button[aria-pressed=true]{border-color:#2aa86b;color:#1c7d4d;background:#e8f8ef}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.card{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:#fff;border:2px solid var(--line);
+  border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);transition:transform .25s,border-color .25s;animation:in .5s both}
+@keyframes in{from{opacity:0;transform:translateY(14px)}}
+.card:hover{transform:translateY(-6px);border-color:var(--cc,var(--brand))}
+body.kids .card:hover{transform:translateY(-8px) rotate(-1.5deg)}
+body.kids .card:nth-child(even):hover{transform:translateY(-8px) rotate(1.5deg)}
+.thumb{aspect-ratio:16/10;background:var(--cc,var(--brand));position:relative;overflow:hidden}
+.thumb svg,.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .zoom{position:absolute;right:10px;bottom:10px;background:#fff;border-radius:99px;padding:3px 10px;font-size:.78rem;font-weight:600;color:var(--ink);opacity:0;transform:translateY(6px);transition:.2s}
+.card:hover .zoom,.card:focus-visible .zoom{opacity:1;transform:none}
+.info{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px}
+.info h3{font-family:var(--display);font-size:1.12rem}
+.info small{color:var(--muted);font-size:.88rem}
+.tag{align-self:flex-start;margin-top:6px;font-size:.74rem;font-weight:600;padding:2px 10px;border-radius:99px;background:#f0f0f0;color:#666}
+.tag.open{background:#e8f8ef;color:#1c7d4d}
 .empty{color:var(--muted);padding:12px 0}
+
 .social{display:flex;flex-wrap:wrap;gap:12px}
-.social a{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:14px;border:1px solid var(--line);
-  background:var(--card);color:var(--text);text-decoration:none;font-weight:600;transition:.2s}
-.social a:hover{background:linear-gradient(90deg,var(--accent),var(--accent2));border-color:transparent;transform:translateY(-2px)}
+.social a{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:99px;background:var(--soft);color:var(--ink);
+  text-decoration:none;font-weight:600;transition:.2s}
+.social a:hover{background:var(--brand);color:#fff;transform:translateY(-3px) rotate(-1deg)}
 .social svg{width:20px;height:20px;fill:currentColor}
-footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:48px}
+footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:48px;display:flex;flex-direction:column;align-items:center;gap:10px}
+footer img{height:22px;width:auto}
+#score{display:none;position:fixed;left:16px;bottom:16px;z-index:5;background:#fff;border:2px solid var(--line);border-radius:99px;padding:6px 14px;font-weight:600;box-shadow:var(--shadow)}
+body.kids #score.on{display:block}
+
+/* popup */
+dialog.dlg{border:none;padding:0;margin:auto;border-radius:var(--r);width:min(560px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;
+  background:#fff;color:var(--ink);box-shadow:0 30px 80px -20px rgba(20,30,50,.55);font-family:var(--font)}
+dialog.dlg[open]{animation:pop .3s cubic-bezier(.2,1.3,.4,1)}
+dialog.dlg::backdrop{background:rgba(30,40,60,.55);backdrop-filter:blur(3px)}
+@keyframes pop{from{transform:scale(.9) translateY(14px);opacity:0}}
+.dlg .photo{aspect-ratio:16/10;background:var(--cc,var(--brand))}
+.dlg .photo svg,.dlg .photo img{width:100%;height:100%;object-fit:cover;display:block}
+.dlg .body{padding:18px 22px 22px;display:flex;flex-direction:column;gap:8px}
+.dlg h3{font-family:var(--display);font-size:1.5rem}
+.dlg p{color:var(--muted)}
+.dlg .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.dlg .row a,.dlg .row button{padding:10px 18px;border-radius:99px;border:2px solid var(--line);background:#fff;color:var(--ink);font:600 .93rem var(--font);cursor:pointer;text-decoration:none;transition:.2s}
+.dlg .row a.go{background:var(--brand);border-color:var(--brand);color:#fff}
+.dlg .row a:hover,.dlg .row button:hover{transform:translateY(-2px)}
+.dlg .x{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;border:none;background:#fff;color:var(--ink);font-size:1.1rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:2}
+.dlg .nav{position:absolute;top:calc(min(560px,100vw - 32px) * .3125 - 20px);width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:var(--ink);font-size:1.3rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);z-index:2}
+.dlg .prev{left:10px}.dlg .next{right:10px}
+.dlg .count{font-size:.8rem;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<canvas id="stars" aria-hidden="true"></canvas>
+<div id="deco" aria-hidden="true"><i class="blob a"></i><i class="blob b"></i></div>
 <main>
+  <div class="top">
+    <button class="kidsbtn" id="kidsBtn" type="button" aria-pressed="false">🧸 Modo infantil</button>
+  </div>
+
   <header>
-    <div class="logo" id="brand">Magic Dreams</div><br>
-    <span class="badge"><i class="dot"></i><span id="statusText">Sitio en mantenimiento</span></span>
+    <img class="logo" id="logo" src="img/logo.svg" alt="Magic Dreams">
+    <span class="badge"><i class="dot"></i><span id="statusText">Web en mantenimiento</span></span>
     <h1 id="title"></h1>
     <p id="message"></p>
-    <div id="countdown" aria-live="off">
+    <div id="countdown">
       <div><b id="cd-d">0</b><span>días</span></div>
       <div><b id="cd-h">0</b><span>horas</span></div>
       <div><b id="cd-m">0</b><span>min</span></div>
@@ -89,65 +156,90 @@ footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:48px}
     <div class="social" id="social"></div>
   </section>
 
-  <footer id="footer"></footer>
+  <footer>
+    <img src="img/logo-horizontal.svg" alt="Magic Dreams">
+    <span id="footer"></span>
+  </footer>
 </main>
+<div id="score" role="status">🎈 Globos: <b id="scoreN">0</b></div>
+
+<dialog class="dlg" id="dlg" aria-labelledby="dName">
+  <button class="x" id="dClose" type="button" aria-label="Cerrar">✕</button>
+  <button class="nav prev" id="dPrev" type="button" aria-label="Local anterior">‹</button>
+  <button class="nav next" id="dNext" type="button" aria-label="Local siguiente">›</button>
+  <div class="photo" id="dPhoto"></div>
+  <div class="body">
+    <span class="count" id="dCount"></span>
+    <h3 id="dName"></h3>
+    <p id="dAddr"></p>
+    <p id="dHours"></p>
+    <div class="row">
+      <a class="go" id="dMap" target="_blank" rel="noopener">Cómo llegar →</a>
+      <button id="dCopy" type="button">Copiar dirección</button>
+    </div>
+  </div>
+</dialog>
 
 <script>
 /* ============================================================
    CONFIGURACIÓN — edita solo este bloque; la página se genera sola.
-   - reopenAt: fecha ISO (ej. "2026-10-12T08:00:00-05:00") para mostrar cuenta regresiva. null = oculto.
-   - stores[].hours: opcional, { dias: [0..6] (0=domingo), abre:"10:00", cierra:"20:00" }.
-     Si lo defines, se muestra el horario y el estado Abierto/Cerrado en tiempo real (hora de Ecuador).
-   - stores[].maps: opcional; si falta se genera un enlace de Google Maps con el nombre.
-   - social[]: agrega o quita redes. Instagram/TikTok se omiten hasta que pongas la URL.
+   - stores[].photo: ruta de la foto del mall (ej. "img/mall-del-norte.jpg").
+     Si el archivo no existe, se muestra una ilustración automática.
+   - stores[].hours: opcional { dias:[0..6] (0=domingo), abre:"10:00", cierra:"20:00" }
+     → muestra horario y "Abierto ahora / Cerrado" (hora de Ecuador).
+   - reopenAt: fecha ISO ("2026-10-12T08:00:00-05:00") para la cuenta regresiva; null = oculta.
+   - social[]: las redes sin url no se muestran.
    ============================================================ */
 const CONFIG = {
   brand: "Magic Dreams",
-  title: "Estamos mejorando para ti",
-  message: "Ropa y accesorios para toda la familia. Estamos renovando nuestra web, ¡muy pronto estará lista! Mientras tanto, visítanos en nuestros 8 locales por todo Guayaquil.",
+  titleHtml: "Estamos <em>renovando</em> nuestra web",
+  message: "Ropa y accesorios para toda la familia. ¡Muy pronto estará lista! Mientras tanto, visítanos en nuestros 8 locales por todo Guayaquil.",
   reopenAt: null,
   timezone: "America/Guayaquil",
   city: "Guayaquil, Ecuador",
   stores: [
-    { name: "Mall del Norte",   place: "Mall del Norte",   address: "Av. Francisco de Orellana, Planta alta" },
-    { name: "Mall del Sur",     place: "Mall del Sur",     address: "Planta Alta, Local 227-228, frente al Patio de Comidas" },
-    { name: "CC Malecón 2000",  place: "Malecón 2000",     address: "Calle Olmedo, Galería B6" },
-    { name: "CC La Rotonda",    place: "C.C. La Rotonda",  address: "Benjamín Carrión, Isla 19A" },
-    { name: "Mall El Fortín",   place: "Mall El Fortín",   address: "Av. Perimetral Norte, Local 236" },
-    { name: "CC Albán Borja",   place: "C.C. Albán Borja", address: "Carlos Arosemena 72, entre las oficinas administrativas de ATM y Óptica SOS" },
-    { name: "Parque California 2", place: "Parque California 2", address: "Km 11, Vía Daule, Bodega J6 PB." },
-    { name: "CC Terminal Terrestre", place: "Terminal Terrestre de Guayaquil", address: "Av. Benjamín Rosales y Av. de las Américas, Terminal Terrestre, planta baja, Local 89, Primera Entrada." }
+    { name: "Mall del Norte",  place: "Mall del Norte",  photo: "img/mall-del-norte.jpg",  address: "Av. Francisco de Orellana, Planta alta" },
+    { name: "Mall del Sur",    place: "Mall del Sur",    photo: "img/mall-del-sur.jpg",    address: "Planta Alta, Local 227-228, frente al Patio de Comidas" },
+    { name: "CC Malecón 2000", place: "Malecón 2000",    photo: "img/malecon-2000.jpg",    address: "Calle Olmedo, Galería B6" },
+    { name: "CC La Rotonda",   place: "C.C. La Rotonda", photo: "img/la-rotonda.jpg",      address: "Benjamín Carrión, Isla 19A" },
+    { name: "Mall El Fortín",  place: "Mall El Fortín",  photo: "img/mall-el-fortin.jpg",  address: "Av. Perimetral Norte, Local 236" },
+    { name: "CC Albán Borja",  place: "C.C. Albán Borja",photo: "img/alban-borja.jpg",     address: "Carlos Arosemena 72, entre las oficinas administrativas de ATM y Óptica SOS" },
+    { name: "Parque California 2", place: "Parque California 2", photo: "img/parque-california-2.jpg", address: "Km 11, Vía Daule, Bodega J6 PB." },
+    { name: "CC Terminal Terrestre", place: "Terminal Terrestre de Guayaquil", photo: "img/terminal-terrestre.jpg", address: "Av. Benjamín Rosales y Av. de las Américas, Terminal Terrestre, planta baja, Local 89, Primera Entrada." }
   ],
   social: [
+    { name: "Instagram", url: "https://www.instagram.com/magicdreams_ec/", icon: "instagram" },
     { name: "Facebook",  url: "https://www.facebook.com/magicdreams.ecuador/", icon: "facebook" },
     { name: "WhatsApp",  url: "https://wa.me/593984945430?text=Hola%20Magic%20Dreams", icon: "whatsapp" },
     { name: "Correo",    url: "mailto:magicdreams.ecuador@gmail.com", icon: "mail" },
-    { name: "Instagram", url: "https://www.instagram.com/magicdreams_ec/", icon: "instagram" },
     { name: "TikTok",    url: "", icon: "tiktok" }
   ]
 };
 
 const ICONS = {
   facebook:'<path d="M13.5 22v-8h2.7l.5-3.3h-3.2V8.6c0-.9.4-1.7 1.8-1.7h1.5V4.1S15.5 4 14.4 4c-2.5 0-4.1 1.5-4.1 4.2v2.5H7.6V14h2.7v8z"/>',
-  instagram:'<path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2zM17.3 6.1a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 3c-2.4 0-2.7 0-3.7.1-3.2.1-4.7 1.7-4.9 4.9C3.3 9 3.3 9.3 3.3 12s0 3 .1 3.9c.2 3.200 1.7 4.700 4.900 4.900 1 .1 1.300.1 3.700.1s2.700 0 3.700-.1c3.200-.2 4.700-1.700 4.900-4.900.1-1 .1-1.300.1-3.900s0-2.900-.1-3.900c-.2-3.200-1.700-4.700-4.900-4.900C14.700 3 14.400 3 12 3zm0 1.600c2.400 0 2.700 0 3.600.1 2.200.1 3.300 1.200 3.400 3.400.1.900.1 1.200.1 3.600s0 2.700-.1 3.600c-.1 2.200-1.200 3.300-3.400 3.400-.9.100-1.200.1-3.600.1s-2.700 0-3.600-.1c-2.200-.1-3.300-1.200-3.400-3.400-.1-.9-.1-1.200-.1-3.600s0-2.700.1-3.600C5 5.900 6.100 4.800 8.400 4.700c.9-.1 1.200-.1 3.600-.1z"/>',
-  tiktok:'<path d="M16.6 3h-2.9v12.3a2.600 2.600 0 1 1-2.600-2.600c.3 0 .5 0 .8.1V9.800a5.600 5.600 0 1 0 4.700 5.500V9a6.800 6.800 0 0 0 3.900 1.200V7.300A3.900 3.900 0 0 1 16.600 3z"/>',
-  whatsapp:'<path d="M12 2a10 10 0 0 0-8.600 15L2 22l5.200-1.400A10 10 0 1 0 12 2zm5.800 14.200c-.2.700-1.400 1.300-1.900 1.300-.5.100-1.100.100-1.800-.1-.4-.1-1-.3-1.700-.6-3-1.300-4.900-4.300-5-4.500-.1-.2-1.200-1.600-1.200-3s.8-2.100 1-2.400c.3-.3.600-.3.800-.3h.6c.2 0 .4 0 .6.500l.8 2c.1.200.1.300 0 .5l-.3.500-.4.400c-.1.100-.3.300-.1.600.2.300.7 1.200 1.600 1.900 1.100 1 2 1.300 2.300 1.400.3.100.4.100.6-.1l.8-1c.2-.3.400-.2.600-.1l1.900.9c.3.100.5.200.5.300.1.200.1.800-.1 1.500z"/>',
-  mail:'<path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.200L4.500 7v.1L12 12.200 19.500 7.100V7z"/>',
-  link:'<path d="M10.600 13.400a1 1 0 0 1 0-1.400l3-3a3 3 0 1 1 4.200 4.200l-1.500 1.500-1.400-1.400 1.500-1.500a1 1 0 0 0-1.400-1.400l-3 3a1 1 0 0 1-1.400 0zM13.400 10.600a1 1 0 0 1 0 1.400l-3 3a3 3 0 1 1-4.200-4.200l1.500-1.500 1.400 1.400-1.500 1.500a1 1 0 0 0 1.400 1.400l3-3a1 1 0 0 1 1.400 0z"/>'
+  instagram:'<path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2zM17.3 6.1a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2zM12 3c-2.4 0-2.7 0-3.7.1-3.2.1-4.7 1.7-4.9 4.9C3.3 9 3.3 9.3 3.3 12s0 3 .1 3.9c.2 3.2 1.7 4.7 4.9 4.9 1 .1 1.3.1 3.7.1s2.7 0 3.7-.1c3.2-.2 4.7-1.7 4.9-4.9.1-1 .1-1.3.1-3.9s0-2.9-.1-3.9c-.2-3.2-1.7-4.7-4.9-4.9C14.7 3 14.4 3 12 3zm0 1.6c2.4 0 2.7 0 3.6.1 2.2.1 3.3 1.2 3.4 3.4.1.9.1 1.2.1 3.6s0 2.7-.1 3.6c-.1 2.2-1.2 3.3-3.4 3.4-.9.1-1.2.1-3.6.1s-2.7 0-3.6-.1c-2.2-.1-3.3-1.2-3.4-3.4-.1-.9-.1-1.2-.1-3.6s0-2.7.1-3.6C5 5.9 6.1 4.8 8.4 4.7c.9-.1 1.2-.1 3.6-.1z"/>',
+  tiktok:'<path d="M16.6 3h-2.9v12.3a2.6 2.6 0 1 1-2.6-2.6c.3 0 .5 0 .8.1V9.8a5.6 5.6 0 1 0 4.7 5.5V9a6.8 6.8 0 0 0 3.9 1.2V7.3A3.9 3.9 0 0 1 16.6 3z"/>',
+  whatsapp:'<path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.1-.2-1.2-1.6-1.2-3s.8-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.6 1.9 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.5z"/>',
+  mail:'<path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4.5 7v.1L12 12.2 19.5 7.1V7z"/>',
+  link:'<path d="M10.6 13.4a1 1 0 0 1 0-1.4l3-3a3 3 0 1 1 4.2 4.2l-1.5 1.5-1.4-1.4 1.5-1.5a1 1 0 0 0-1.4-1.4l-3 3a1 1 0 0 1-1.4 0zM13.4 10.6a1 1 0 0 1 0 1.4l-3 3a3 3 0 1 1-4.2-4.2l1.5-1.5 1.4 1.4-1.5 1.5a1 1 0 0 0 1.4 1.4l3-3a1 1 0 0 1 1.4 0z"/>'
 };
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* colores de las tarjetas: los de la marca; en modo infantil, arcoíris */
+const BRAND_COLORS = ["#e94667","#2b3c54","#f39200","#ef7f7e","#46607f","#d9822b","#c93a5a","#3d3d3c"];
+const KIDS_COLORS  = ["#ff7a59","#1ea7e1","#ffc233","#7bc96f","#a98bff","#ff6fae","#2fc4b2","#ff9f43"];
+const colorOf = i => (document.body.classList.contains("kids") ? KIDS_COLORS : BRAND_COLORS)[i % 8];
 
-/* Hora actual en la zona horaria configurada */
+/* ---- Horarios ---- */
 function nowInTZ(){
   const p = new Intl.DateTimeFormat("en-US",{timeZone:CONFIG.timezone,weekday:"short",hour:"2-digit",minute:"2-digit",hour12:false}).formatToParts(new Date());
   const g = t => p.find(x=>x.type===t).value;
   return { day:["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(g("weekday")), min:(+g("hour")%24)*60 + +g("minute") };
 }
-const toMin = hhmm => { const [h,m]=hhmm.split(":").map(Number); return h*60+m; };
+const toMin = h => { const [a,b]=h.split(":").map(Number); return a*60+b; };
 const DAYS = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
-
 function isOpen(s){
   if(!s.hours) return null;
   const n = nowInTZ();
@@ -155,32 +247,95 @@ function isOpen(s){
 }
 function hoursLabel(h){
   const d = h.dias.slice().sort();
-  const days = d.length===7 ? "Todos los días" : d.map(x=>DAYS[x]).join(", ");
-  return `${days} · ${h.abre}–${h.cierra}`;
+  return `${d.length===7 ? "Todos los días" : d.map(x=>DAYS[x]).join(", ")} · ${h.abre}–${h.cierra}`;
 }
-function mapsUrl(s){
-  return s.maps || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`Magic Dreams ${s.place||s.name}, ${CONFIG.city}`);
+const mapsUrl = s => s.maps || "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(`Magic Dreams ${s.place||s.name}, ${CONFIG.city}`);
+
+/* ---- Ilustración de respaldo (cuando no hay foto) ---- */
+function art(s, i){
+  const c = colorOf(i), w = (i*37)%5;
+  let wins = "";
+  for(let r=0;r<3;r++) for(let k=0;k<6;k++)
+    wins += `<rect x="${58+k*38}" y="${62+r*30}" width="24" height="18" rx="4" fill="#fff" opacity="${(r+k+w)%4===0?1:.55}"/>`;
+  const label = esc(s.name.replace(/^(CC|Mall del|Mall)\s+/i,"").slice(0,16));
+  return `<svg viewBox="0 0 320 200" role="img" aria-label="Ilustración de ${esc(s.name)}" preserveAspectRatio="xMidYMid slice">
+    <rect width="320" height="200" fill="${c}"/>
+    <circle cx="${40+w*55}" cy="40" r="22" fill="#fff" opacity=".35"/>
+    <ellipse cx="250" cy="34" rx="34" ry="12" fill="#fff" opacity=".3"/>
+    <rect x="40" y="46" width="240" height="116" rx="10" fill="rgba(0,0,0,.18)"/>
+    <rect x="44" y="42" width="232" height="120" rx="10" fill="#fff" opacity=".22"/>
+    ${wins}
+    <rect x="132" y="128" width="56" height="34" rx="8" fill="#fff"/>
+    <path d="M24 162h272v14H24z" fill="rgba(0,0,0,.2)"/>
+    <rect x="86" y="14" width="148" height="26" rx="13" fill="#fff"/>
+    <text x="160" y="32" text-anchor="middle" font-family="Fredoka,Outfit,sans-serif" font-weight="700" font-size="14" fill="${c}">${label}</text>
+  </svg>`;
 }
+/* foto real si existe; si el archivo falla, ilustración */
+function visual(s, i){
+  if(!s.photo) return art(s,i);
+  return `<img src="${esc(s.photo)}" alt="Foto de ${esc(s.name)}" loading="lazy" data-fallback="${i}">`;
+}
+document.addEventListener("error", e => {
+  const el = e.target;
+  if(el.tagName==="IMG" && el.dataset.fallback!==undefined){
+    const i = +el.dataset.fallback;
+    el.outerHTML = art(CONFIG.stores[i], i);
+  }
+}, true);
 
 /* ---- Locales ---- */
 let onlyOpen = false;
 function renderStores(){
   const q = $("search").value.trim().toLowerCase();
-  const list = CONFIG.stores.filter(s =>
+  const list = CONFIG.stores.map((s,i)=>({s,i})).filter(({s}) =>
     (!q || (s.name+" "+(s.place||"")+" "+(s.address||"")).toLowerCase().includes(q)) &&
     (!onlyOpen || isOpen(s) === true));
-  $("stores").innerHTML = list.length ? list.map(s => {
+  $("stores").innerHTML = list.length ? list.map(({s,i},n) => {
     const open = isOpen(s);
-    return `<article class="card">
-      <h3>${esc(s.name)}</h3>
-      ${s.address ? `<small>${esc(s.address)}</small>` : (s.place && s.place!==s.name ? `<small>${esc(s.place)}</small>` : "")}
-      ${s.hours ? `<small>🕒 ${esc(hoursLabel(s.hours))}</small>` : ""}
-      ${s.phone ? `<small>📞 <a href="tel:${esc(s.phone)}" style="color:inherit">${esc(s.phone)}</a></small>` : ""}
-      ${open===null ? "" : `<span class="tag ${open?"open":""}">${open?"Abierto ahora":"Cerrado"}</span>`}
-      <a class="map" href="${esc(mapsUrl(s))}" target="_blank" rel="noopener">Cómo llegar →</a>
-    </article>`;
+    return `<button class="card" type="button" data-i="${i}" style="--cc:${colorOf(i)};animation-delay:${n*60}ms" aria-label="Ver ${esc(s.name)}">
+      <div class="thumb">${visual(s,i)}<span class="zoom">Ver foto 🔍</span></div>
+      <div class="info">
+        <h3>${esc(s.name)}</h3>
+        <small>${esc(s.address||s.place||"")}</small>
+        ${s.hours ? `<small>🕒 ${esc(hoursLabel(s.hours))}</small>` : ""}
+        ${open===null ? "" : `<span class="tag ${open?"open":""}">${open?"Abierto ahora":"Cerrado"}</span>`}
+      </div></button>`;
   }).join("") : `<p class="empty">No encontramos locales con ese criterio.</p>`;
 }
+
+/* ---- Popup ---- */
+const dlg = $("dlg");
+let cur = 0;
+function showStore(i){
+  cur = i;
+  const s = CONFIG.stores[i];
+  dlg.style.setProperty("--cc", colorOf(i));
+  $("dPhoto").innerHTML = visual(s,i);
+  $("dName").textContent = s.name;
+  $("dAddr").textContent = "📍 " + (s.address || s.place || "");
+  $("dHours").textContent = s.hours ? "🕒 " + hoursLabel(s.hours) : "";
+  $("dHours").hidden = !s.hours;
+  $("dMap").href = mapsUrl(s);
+  $("dCount").textContent = `Local ${i+1} de ${CONFIG.stores.length}`;
+  $("dCopy").textContent = "Copiar dirección";
+}
+function openStore(i){ showStore(i); if(!dlg.open) dlg.showModal(); }
+function step(d){ const n = CONFIG.stores.length; showStore((cur + d + n) % n); }
+$("stores").addEventListener("click", e => { const c = e.target.closest(".card"); if(c) openStore(+c.dataset.i); });
+$("dClose").onclick = () => dlg.close();
+$("dPrev").onclick = () => step(-1);
+$("dNext").onclick = () => step(1);
+dlg.addEventListener("click", e => { if(e.target === dlg) dlg.close(); });
+dlg.addEventListener("keydown", e => {
+  if(e.key==="ArrowLeft") step(-1);
+  if(e.key==="ArrowRight") step(1);
+});
+$("dCopy").onclick = async () => {
+  const s = CONFIG.stores[cur], txt = `${s.name} — ${s.address||s.place}`;
+  try{ await navigator.clipboard.writeText(txt); $("dCopy").textContent = "¡Copiada! ✓"; }
+  catch{ $("dCopy").textContent = txt; }
+};
 
 /* ---- Redes ---- */
 function renderSocial(){
@@ -195,45 +350,60 @@ function startCountdown(){
   const end = new Date(CONFIG.reopenAt).getTime();
   if(isNaN(end)) return;
   $("countdown").style.display = "flex";
-  const tick = () => {
-    const diff = Math.max(0, end - Date.now());
-    $("cd-d").textContent = Math.floor(diff/864e5);
-    $("cd-h").textContent = Math.floor(diff%864e5/36e5);
-    $("cd-m").textContent = Math.floor(diff%36e5/6e4);
-    $("cd-s").textContent = Math.floor(diff%6e4/1e3);
-    if(diff===0){ $("statusText").textContent = "¡Ya casi! Recarga la página"; clearInterval(t); }
-  };
-  const t = setInterval(tick, 1000); tick();
+  const t = setInterval(tick, 1000);
+  function tick(){
+    const d = Math.max(0, end - Date.now());
+    $("cd-d").textContent = Math.floor(d/864e5);
+    $("cd-h").textContent = Math.floor(d%864e5/36e5);
+    $("cd-m").textContent = Math.floor(d%36e5/6e4);
+    $("cd-s").textContent = Math.floor(d%6e4/1e3);
+    if(d===0){ $("statusText").textContent = "¡Ya casi! Recarga la página"; clearInterval(t); }
+  }
+  tick();
 }
 
-/* ---- Fondo animado ---- */
-function stars(){
-  const c = $("stars"), x = c.getContext("2d");
-  if(matchMedia("(prefers-reduced-motion:reduce)").matches) return;
-  let w,h,pts;
-  const init = () => { w=c.width=innerWidth; h=c.height=innerHeight;
-    pts = Array.from({length:Math.min(90,Math.floor(w*h/16000))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+.3,v:Math.random()*.25+.05,a:Math.random()})); };
-  const loop = () => { x.clearRect(0,0,w,h);
-    for(const p of pts){ p.y-=p.v; p.a+=.02; if(p.y<-5){p.y=h+5;p.x=Math.random()*w}
-      x.globalAlpha=.35+.35*Math.sin(p.a); x.fillStyle="#fff"; x.beginPath(); x.arc(p.x,p.y,p.r,0,7); x.fill(); }
-    requestAnimationFrame(loop); };
-  addEventListener("resize",init); init(); loop();
+/* ---- Modo infantil: globos que se revientan ---- */
+let balloonTimer = null, popped = 0;
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+function spawnBalloon(){
+  const b = document.createElement("i");
+  b.className = "balloon";
+  b.style.cssText = `left:${Math.random()*92}%;background:${KIDS_COLORS[Math.floor(Math.random()*8)]};--dx:${(Math.random()*120-60)|0}px;animation-duration:${9+Math.random()*8}s`;
+  b.addEventListener("animationend", () => b.remove());
+  b.addEventListener("pointerdown", e => {
+    const p = document.createElement("span");
+    p.className = "pop"; p.textContent = ["¡Pop!","¡Yupi!","✨","¡Bravo!"][popped%4];
+    p.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px`;
+    $("deco").appendChild(p); setTimeout(() => p.remove(), 700);
+    b.remove(); $("scoreN").textContent = ++popped;
+  });
+  $("deco").appendChild(b);
 }
+function setKids(on, save=true){
+  document.body.classList.toggle("kids", on);
+  $("kidsBtn").setAttribute("aria-pressed", on);
+  $("kidsBtn").textContent = on ? "🧸 Modo infantil: sí" : "🧸 Modo infantil";
+  $("score").classList.toggle("on", on);
+  clearInterval(balloonTimer);
+  document.querySelectorAll(".balloon").forEach(b => b.remove());
+  if(on && !reduce){ for(let k=0;k<4;k++) setTimeout(spawnBalloon, k*500); balloonTimer = setInterval(spawnBalloon, 1800); }
+  renderStores();
+  if(save){ try{ localStorage.setItem("md-kids", on ? "1" : "0"); }catch{} }
+}
+$("kidsBtn").onclick = () => setKids(!document.body.classList.contains("kids"));
 
 /* ---- Init ---- */
-document.title = `${CONFIG.brand} | Volvemos pronto`;
-$("brand").textContent = CONFIG.brand;
-$("title").textContent = CONFIG.title;
+document.title = `${CONFIG.brand} Mantenimiento`;
+$("title").innerHTML = CONFIG.titleHtml;
 $("message").textContent = CONFIG.message;
 $("footer").textContent = `© ${new Date().getFullYear()} ${CONFIG.brand} · ${CONFIG.city}`;
 if(CONFIG.stores.some(s => s.hours)) $("openNow").hidden = false;
 $("search").addEventListener("input", renderStores);
-$("openNow").addEventListener("click", e => {
-  onlyOpen = !onlyOpen; e.target.setAttribute("aria-pressed", onlyOpen);
-  e.target.style.borderColor = onlyOpen ? "var(--ok)" : ""; renderStores();
-});
-renderStores(); renderSocial(); startCountdown(); stars();
-setInterval(renderStores, 60000); /* refresca Abierto/Cerrado cada minuto */
+$("openNow").addEventListener("click", e => { onlyOpen = !onlyOpen; e.target.setAttribute("aria-pressed", onlyOpen); renderStores(); });
+renderStores(); renderSocial(); startCountdown();
+setInterval(renderStores, 60000);
+let saved = null; try{ saved = localStorage.getItem("md-kids"); }catch{}
+if(saved === "1" || location.hash === "#infantil") setKids(true, false);
 </script>
 </body>
 </html>
